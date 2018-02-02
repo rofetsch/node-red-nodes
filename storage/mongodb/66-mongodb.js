@@ -216,6 +216,10 @@ module.exports = function(RED) {
                                 skip = 0;
                             }
 
+                            if (ObjectID.isValid(selector._id)) {
+                                selector._id = new ObjectID(selector._id);
+                            }
+                            
                             coll.find(selector,msg.projection).sort(msg.sort).limit(limit).skip(skip).toArray(function(err, items) {
                                 if (err) {
                                     node.error(err);
